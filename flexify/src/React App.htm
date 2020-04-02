@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:3000/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <link rel="icon" href="http://localhost:3000/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="Web site created using create-react-app">
+    <link rel="apple-touch-icon" href="http://localhost:3000/logo192.png">
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="http://localhost:3000/manifest.json">
+    <!--
+      Notice the use of  in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+  <script data-dapp-detection="">
+(function() {
+  let alreadyInsertedMetaTag = false
+
+  function __insertDappDetected() {
+    if (!alreadyInsertedMetaTag) {
+      const meta = document.createElement('meta')
+      meta.name = 'dapp-detected'
+      document.head.appendChild(meta)
+      alreadyInsertedMetaTag = true
+    }
+  }
+
+  if (window.hasOwnProperty('web3')) {
+    // Note a closure can't be used for this var because some sites like
+    // www.wnyc.org do a second script execution via eval for some reason.
+    window.__disableDappDetectionInsertion = true
+    // Likely oldWeb3 is undefined and it has a property only because
+    // we defined it. Some sites like wnyc.org are evaling all scripts
+    // that exist again, so this is protection against multiple calls.
+    if (window.web3 === undefined) {
+      return
+    }
+    __insertDappDetected()
+  } else {
+    var oldWeb3 = window.web3
+    Object.defineProperty(window, 'web3', {
+      configurable: true,
+      set: function (val) {
+        if (!window.__disableDappDetectionInsertion)
+          __insertDappDetected()
+        oldWeb3 = val
+      },
+      get: function () {
+        if (!window.__disableDappDetectionInsertion)
+          __insertDappDetected()
+        return oldWeb3
+      }
+    })
+  }
+})()</script><style type="text/css">body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.header-text {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.flexify-logo {
+  margin-top: 0;
+  margin-bottom: 0;
+  width: "400px";
+}
+
+.slide-container {
+  width: 70%;
+  margin: auto;
+}
+
+h3 {
+  text-align: center;
+}
+
+.each-slide > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  height: 300px;
+}
+
+.each-slide span {
+  padding: 20px;
+  font-size: 20px;
+  background: #efefef;
+  text-align: center;
+}
+
+.each-fade {
+  display: flex;
+}
+
+.each-fade .image-container {
+  width: 75%;
+  overflow: hidden;
+}
+
+.each-fade .image-container img {
+  width: 100%;
+}
+
+.each-fade h2 {
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  background: #adceed;
+}
+</style><style type="text/css">.App {
+  text-align: center;
+}
+
+.flexify-logo {
+  height: 60vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .flexify-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+</style><style type="text/css">.react-slideshow-container {
+  display: flex;
+  align-items: center;
+}
+
+.react-slideshow-container .nav {
+  height: 30px;
+  background: rgba(255, 255, 255, 0.6);
+  width: 30px;
+  z-index: 10;
+  text-align: center;
+  cursor: pointer;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.react-slideshow-container .nav span {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-color: #000;
+  border-style: solid;
+  transform: rotate(45deg);
+}
+
+.react-slideshow-container .nav.disabled span {
+  border-color: #666;
+}
+
+.react-slideshow-container .nav:hover {
+  background: white;
+  color: #666;
+}
+
+.react-slideshow-container .nav.disabled:hover {
+  cursor: not-allowed;
+}
+
+.react-slideshow-container .nav:first-of-type {
+  margin-right: -30px;
+  border-right: none;
+  border-top: none;
+}
+
+.react-slideshow-container .nav:first-of-type span {
+  margin-left: 5px;
+  border-right: none;
+  border-top: none;
+}
+
+.react-slideshow-container .nav:last-of-type {
+  margin-left: -30px;
+}
+
+.react-slideshow-container .nav:last-of-type span {
+  margin-right: 5px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.react-slideshow-container + div.indicators {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.react-slideshow-container + div.indicators > div {
+  width: 7px;
+  height: 7px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  background: #ccc;
+  cursor: pointer;
+}
+
+.react-slideshow-container + div.indicators > div:hover {
+  background: #666;
+}
+
+.react-slideshow-container + div.indicators > div.active {
+  background: #000;
+}
+
+.react-slideshow-container + div.indicators > div:last-of-type {
+  margin-right: 0;
+}
+</style><style type="text/css">.react-slideshow-wrapper.slide {
+  width: 100%;
+  overflow: hidden;
+}
+
+.react-slideshow-wrapper .images-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+</style><style type="text/css">.react-slideshow-fade-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.react-slideshow-fade-wrapper .react-slideshow-fade-images-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.react-slideshow-fade-wrapper .react-slideshow-fade-images-wrap > div {
+  position: relative;
+  opacity: 0;
+}
+</style><style type="text/css">.react-slideshow-zoom-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.react-slideshow-zoom-wrapper .zoom-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+.react-slideshow-zoom-wrapper .zoom-wrapper > div {
+  position: relative;
+  display: flex;
+}
+</style></head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"><div class="App"><div><div class="slide-container"><div><div class="react-slideshow-container"><div class="nav " data-type="prev"><span></span></div><div class="react-slideshow-wrapper slide"><div class="images-wrap" style="transform: translate(-1008px); width: 6048px;"><div data-index="-1" style="width: 1008px;"><div class="each-slide"><div style="background-image: url(&quot;../images/yoga.png&quot;);"><span>Slide 3</span></div></div></div><div data-index="0" class="active" style="width: 1008px;"><div class="each-slide"><div style="background-image: url(&quot;../images/exercise.png&quot;);"><span>Slide 1</span></div></div></div><div data-index="1" class="" style="width: 1008px;"><div class="each-slide"><div style="background-image: url(&quot;../images/flexify.png&quot;);"><span>Slide 2</span></div></div></div><div data-index="2" class="" style="width: 1008px;"><div class="each-slide"><div style="background-image: url(&quot;../images/running.png&quot;);"><span>Slide 3</span></div></div></div><div data-index="3" class="" style="width: 1008px;"><div class="each-slide"><div style="background-image: url(&quot;../images/yoga.png&quot;);"><span>Slide 3</span></div></div></div><div data-index="-1" style="width: 1008px;"><div class="each-slide"><div style="background-image: url(&quot;../images/exercise.png&quot;);"><span>Slide 1</span></div></div></div></div></div><div class="nav " data-type="next"><span></span></div></div><div class="indicators"><div data-key="0" class="active"></div><div data-key="1" class=""></div><div data-key="2" class=""></div><div data-key="3" class=""></div></div></div></div><h1 class="header-text"> Welcome to Flexify! </h1><img src="./React App_files/flexify.ee703ef8.png" class="flexify-logo"></div></div></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  <script src="./React App_files/bundle.js"></script><script src="./React App_files/0.chunk.js"></script><script src="./React App_files/main.chunk.js"></script><script src="./React App_files/main.d8c965ead9839aa9e577.hot-update.js"></script>
+
+</body></html>
