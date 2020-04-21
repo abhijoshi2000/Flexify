@@ -18,7 +18,9 @@ class LoginPage extends Component {
           </h4>
         </div>
         <img className="down-arrow" src={downArrow}></img>
-        <img className="flexify-logo" src={flexify}></img>
+        <a href="http://localhost:8888">
+          <img className="flexify-logo" src={flexify}></img>
+        </a>
       </div>
     );
   }
