@@ -1,13 +1,15 @@
 body {
-  margin: 0;
-  margin-top: -10px;
-  background-image: url("../src/images/background.jpg");
-  background-size: cover;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-background-size: 100%;
+  background-image: url("../src/images/background1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
 }
 
 code {
@@ -15,25 +17,39 @@ code {
     monospace;
 }
 
-.body {
-}
-
 .header-text-and-logo {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
   font-size: x-large;
   z-index: 100;
+  text-align: center;
 }
 
 img.flexify-logo {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-top: -75px;
+  margin-top: -50px;
   padding-top: -1em;
+  width: 300px;
+  height: auto;
+}
+
+img.flexify-logo-2 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -40px;
+  margin-bottom: -50px;
+  width: 250px;
+  height: auto;
 }
 
 img.down-arrow {
-  height: 15%;
-  width: 15%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  width: 100px;
+  height: auto;
 }

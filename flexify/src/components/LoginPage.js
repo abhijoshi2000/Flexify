@@ -7,18 +7,18 @@ class LoginPage extends Component {
     return (
       <div className="body">
         <div className="header-text-and-logo">
-          <h1 className="header-text"> Welcome to Flexify! </h1>
-          <h3 className="header-text-2">
+          <h1> Welcome to Flexify! </h1>
+          <h3>
             Get the best exercise tracks from your playlist and <br></br>get
             ready for the gym!
           </h3>
-          <h4 className="header-text-3">
+          <h4>
             Click the image below to login to your Spotify Account and get
             started!
           </h4>
         </div>
         <img className="down-arrow" src={downArrow}></img>
-        <a href="http://localhost:8888">
+        <a href="http://localhost:8888/login">
           <img className="flexify-logo" src={flexify}></img>
         </a>
       </div>
