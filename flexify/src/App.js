@@ -12,6 +12,10 @@ class App extends Component {
     const params = this.getHashParams();
     this.state = {
       loggedIn: params.access_token ? true : false,
+      nowPlaying: {
+        name: "Not checked",
+        image: "",
+      },
       alert: false,
       isMobile: false,
     };
@@ -30,12 +34,23 @@ class App extends Component {
     }
     return hashParams;
   }
+
+  getNowPlaying() {
+    spotifyWebAPI.getMyCurrentPlaybackState().then((response) => {
+      this.setState({
+        nowPlaying: {
+          name: response.item.name,
+          image: response.item.album.images[0].url,
+        },
+      });
+    });
+  }
+
   render() {
     if (!this.state.loggedIn) {
       return (
         <div>
           <LoginPage />
-          <h1>{this.state.loggedIn}</h1>
         </div>
       );
     } else {

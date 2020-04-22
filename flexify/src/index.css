@@ -53,3 +53,13 @@ img.down-arrow {
   width: 100px;
   height: auto;
 }
+
+.exercise-options {
+  display: flex;
+  justify-content: center;
+}
+
+.exercise-images {
+  width: 280px;
+  height: 200px;
+}

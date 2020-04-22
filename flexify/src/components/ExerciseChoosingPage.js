@@ -5,8 +5,6 @@ import Weightlifting from "../components/Weightlifting";
 import Cardio from "../components/Cardio";
 import HIIT from "../components/HIIT";
 import Dance from "../components/Dance";
-import Warmup from "../components/Warmup";
-import CoolDown from "../components/CoolDown";
 
 class ExerciseChoosingPage extends Component {
   render() {
@@ -23,10 +21,8 @@ class ExerciseChoosingPage extends Component {
             <Weightlifting />
             <Cardio />
             <Yoga />
-            <HIIT />
             <Dance />
-            <Warmup />
-            <CoolDown />
+            <HIIT />
           </div>
         </div>
       </div>
