@@ -7,7 +7,12 @@ class Yoga extends Component {
       <div>
         <h2>Yoga</h2>
         <h4> 60 to 90 BPM</h4>
-        <img src={yoga} className="exercise-images"></img>
+        <input
+          type="image"
+          className="exercise-images"
+          src={yoga}
+          onClick={this.props.setBPMCountYoga}
+        />
       </div>
     );
   }

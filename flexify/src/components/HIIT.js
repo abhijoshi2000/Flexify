@@ -7,7 +7,12 @@ class HIIT extends Component {
       <div>
         <h2>HIIT/CrossFit</h2>
         <h4> 140 to 180+ BPM</h4>
-        <img className="exercise-images" src={hiit}></img>
+        <input
+          type="image"
+          className="exercise-images"
+          src={hiit}
+          onClick={this.props.setBPMCountHIIT}
+        />
       </div>
     );
   }

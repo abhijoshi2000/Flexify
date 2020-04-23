@@ -7,7 +7,12 @@ class Dance extends Component {
       <div>
         <h2>Dance</h2>
         <h4> 130 to 170 BPM</h4>
-        <img className="exercise-images" src={dancing}></img>
+        <input
+          type="image"
+          className="exercise-images"
+          src={dancing}
+          onClick={this.props.setBPMCountDance}
+        />
       </div>
     );
   }

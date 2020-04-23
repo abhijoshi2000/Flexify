@@ -7,7 +7,12 @@ class Weightlifting extends Component {
       <div>
         <h2>Weights </h2>
         <h4> 130 to 150 BPM</h4>
-        <img src={lifting} className="exercise-images"></img>
+        <input
+          type="image"
+          className="exercise-images"
+          src={lifting}
+          onClick={this.props.setBPMCountWeightLifting}
+        />
       </div>
     );
   }

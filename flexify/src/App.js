@@ -7,9 +7,10 @@ import ExerciseChoosingPage from "./components/ExerciseChoosingPage";
 const spotifyWebAPI = new SpotifyWebAPI();
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     const params = this.getHashParams();
+    this.setBPMCount = this.setBPMCount.bind(this);
     this.state = {
       loggedIn: params.access_token ? true : false,
       nowPlaying: {
@@ -18,6 +19,10 @@ class App extends Component {
       },
       alert: false,
       isMobile: false,
+      BPMCount: {
+        low: 0,
+        high: 0,
+      },
     };
     if (params.access_token) {
       spotifyWebAPI.setAccessToken(params.access_token);
@@ -33,6 +38,12 @@ class App extends Component {
       hashParams[e[1]] = decodeURIComponent(e[2]);
     }
     return hashParams;
+  }
+
+  setBPMCount(value) {
+    this.setState({
+      BPMCount: value,
+    });
   }
 
   getNowPlaying() {
@@ -56,7 +67,11 @@ class App extends Component {
     } else {
       return (
         <div className="Exercise">
-          <ExerciseChoosingPage />
+          <h1> Main Page Component BPM Count Low: {this.state.BPMCount.low}</h1>
+          <h1>
+            Main Page Component BPM Count High: {this.state.BPMCount.high}
+          </h1>
+          <ExerciseChoosingPage data={this.setBPMCount} />
         </div>
       );
     }

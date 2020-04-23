@@ -7,7 +7,12 @@ class Cardio extends Component {
       <div>
         <h2>Cardio</h2>
         <h4> 120 to 140 BPM</h4>
-        <img src={running} className="exercise-images"></img>
+        <input
+          type="image"
+          className="exercise-images"
+          src={running}
+          onClick={this.props.setBPMCountCardio}
+        />
       </div>
     );
   }
