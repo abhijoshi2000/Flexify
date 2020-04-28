@@ -5,6 +5,7 @@ import Weightlifting from "../components/Weightlifting";
 import Cardio from "../components/Cardio";
 import HIIT from "../components/HIIT";
 import Dance from "../components/Dance";
+import PlaylistSelector from "../components/PlaylistSelector";
 
 class ExerciseChoosingPage extends Component {
   constructor(props) {
@@ -19,6 +20,7 @@ class ExerciseChoosingPage extends Component {
         low: 0,
         high: 0,
       },
+      ExerciseChosen: "",
     };
   }
 
@@ -29,9 +31,10 @@ class ExerciseChoosingPage extends Component {
           low: 130,
           high: 150,
         },
+        ExerciseChosen: "WeightLifting",
       },
       () => {
-        this.props.data(this.state.BPMCount);
+        this.props.data(this.state.BPMCount, this.state.ExerciseChosen);
       }
     );
   }
@@ -43,9 +46,10 @@ class ExerciseChoosingPage extends Component {
           low: 120,
           high: 140,
         },
+        ExerciseChosen: "Cardio",
       },
       () => {
-        this.props.data(this.state.BPMCount);
+        this.props.data(this.state.BPMCount, this.state.ExerciseChosen);
       }
     );
   }
@@ -57,9 +61,10 @@ class ExerciseChoosingPage extends Component {
           low: 60,
           high: 90,
         },
+        ExerciseChosen: "Yoga",
       },
       () => {
-        this.props.data(this.state.BPMCount);
+        this.props.data(this.state.BPMCount, this.state.ExerciseChosen);
       }
     );
   }
@@ -71,9 +76,10 @@ class ExerciseChoosingPage extends Component {
           low: 130,
           high: 170,
         },
+        ExerciseChosen: "Dance",
       },
       () => {
-        this.props.data(this.state.BPMCount);
+        this.props.data(this.state.BPMCount, this.state.ExerciseChosen);
       }
     );
   }
@@ -83,11 +89,12 @@ class ExerciseChoosingPage extends Component {
       {
         BPMCount: {
           low: 140,
-          high: 200,
+          high: 400,
         },
+        ExerciseChosen: "HIIT",
       },
       () => {
-        this.props.data(this.state.BPMCount);
+        this.props.data(this.state.BPMCount, this.state.ExerciseChosen);
       }
     );
   }
@@ -98,10 +105,11 @@ class ExerciseChoosingPage extends Component {
         <div className="header-text-and-logo">
           <img className="flexify-logo-2" src={flexify}></img>
           <h4>
-            Choose an exercise category and the playlists from which you want
-            the music from and we will generate a new playlist based on the
-            researched optimal BPM for the chosen activity.
+            Choose an exercise category and a playlist from which you want the
+            music from and we will generate a new exercise playlist based on the
+            researched optimal beats per minute (BPM) for the chosen activity.
           </h4>
+          <h4>Exercise Category Chosen: {this.state.ExerciseChosen}</h4>
           <div className="exercise-options">
             <Weightlifting
               setBPMCountWeightLifting={this.setBPMCountWeightLifting}

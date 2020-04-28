@@ -72,3 +72,22 @@ img.down-arrow {
   width: 280px;
   height: 200px;
 }
+
+.login-page-images {
+  display: flex;
+  justify-content: center;
+}
+
+.playlist-options {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.playlist-images {
+  width: 280px;
+  height: 200px;
+}
+
+.playlist-selector {
+  align-items: center;
+}

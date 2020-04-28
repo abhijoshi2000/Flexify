@@ -16,11 +16,13 @@ class LoginPage extends Component {
             Click the image below to login to your Spotify Account and get
             started!
           </h4>
+          <img className="down-arrow" src={downArrow}></img>
         </div>
-        <img className="down-arrow" src={downArrow}></img>
-        <a href="http://localhost:8888/login">
-          <img className="flexify-logo" src={flexify}></img>
-        </a>
+        <div className="login-page-images">
+          <a href="http://localhost:8888/login">
+            <img className="flexify-logo" src={flexify}></img>
+          </a>
+        </div>
       </div>
     );
   }
