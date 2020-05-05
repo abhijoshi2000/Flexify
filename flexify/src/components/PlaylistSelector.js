@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Option = styled.option`
   cursor: pointer;
-  background-color: #fbc852;
+  background-color: lightseagreen;
   border-radius: 20px;
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -16,7 +16,7 @@ const Form = styled.select`
   border-radius: 20px;
   padding: 10px;
   margin: 0 auto;
-  background-color: #fbc852;
+  background-color: lightseagreen;
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
   font-size: 22px;

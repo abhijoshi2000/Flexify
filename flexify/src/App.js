@@ -249,13 +249,15 @@ class App extends Component {
   };
 
   onSubmitButtonClick(e) {
-    if (this.state.chosenPlaylist.id === "liked") {
-      this.generateSongs();
-    } else {
-      this.setState({ selectedPlaylistSongs: [] });
-      this.getPlaylistSongs(this.state.chosenPlaylist.id);
+    if (this.state.exerciseChosen !== "") {
+      if (this.state.chosenPlaylist.id === "liked") {
+        this.generateSongs();
+      } else {
+        this.setState({ selectedPlaylistSongs: [] });
+        this.getPlaylistSongs(this.state.chosenPlaylist.id);
+      }
+      this.showModal(e);
     }
-    this.showModal(e);
   }
 
   render() {
