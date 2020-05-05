@@ -13,8 +13,6 @@ var cors = require("cors");
 var querystring = require("querystring");
 var cookieParser = require("cookie-parser");
 
-var client_id = "039afdde44684cebbaf65ecb770a93ff"; // Your client id
-var client_secret = "e0c1ea88a87a4eb5b0b97dd3d12c18f8"; // Your secret
 var redirect_uri = "https://flexify-spotify.herokuapp.com/callback"; // Your redirect uri
 
 /**
@@ -22,7 +20,7 @@ var redirect_uri = "https://flexify-spotify.herokuapp.com/callback"; // Your red
  * @param  {number} length The length of the string
  * @return {string} The generated string
  */
-var generateRandomString = function (length) {
+var generateRandomString = function(length) {
   var text = "";
   var possible =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -37,18 +35,30 @@ var stateKey = "spotify_auth_state";
 
 var app = express();
 
-app
-  .use(express.static(__dirname + "/public"))
-  .use(cors())
-  .use(cookieParser());
+//Express only serves static assets in production
+if (process.env.NODE_ENV === "production") {
+  app
+    .use(express.static("client/build"))
+    .use(cookieParser())
+    .use(cors());
+} else {
+  app
+    .use(express.static(__dirname + "/public"))
+    .use(cookieParser())
+    .use(cors());
+}
 
-app.get("/login", function (req, res) {
+// app.use(express.static(__dirname + '/public'))
+// .use(cookieParser())
+// .use(cors());
+
+app.get("/login", function(req, res) {
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
 
   // your application requests authorization
   var scope =
-    "user-read-private user-read-email user-read-playback-state playlist-modify-public playlist-modify-private playlist-read-private";
+    "user-read-private user-read-email user-library-read playlist-read-private playlist-modify-private playlist-modify-public playlist-read-collaborative";
   res.redirect(
     "https://accounts.spotify.com/authorize?" +
       querystring.stringify({
@@ -56,12 +66,12 @@ app.get("/login", function (req, res) {
         client_id: client_id,
         scope: scope,
         redirect_uri: redirect_uri,
-        state: state,
+        state: state
       })
   );
 });
 
-app.get("/callback", function (req, res) {
+app.get("/callback", function(req, res) {
   // your application requests refresh and access tokens
   // after checking the state parameter
 
@@ -73,7 +83,7 @@ app.get("/callback", function (req, res) {
     res.redirect(
       "/#" +
         querystring.stringify({
-          error: "state_mismatch",
+          error: "state_mismatch"
         })
     );
   } else {
@@ -83,17 +93,17 @@ app.get("/callback", function (req, res) {
       form: {
         code: code,
         redirect_uri: redirect_uri,
-        grant_type: "authorization_code",
+        grant_type: "authorization_code"
       },
       headers: {
         Authorization:
           "Basic " +
-          new Buffer(client_id + ":" + client_secret).toString("base64"),
+          new Buffer(client_id + ":" + client_secret).toString("base64")
       },
-      json: true,
+      json: true
     };
 
-    request.post(authOptions, function (error, response, body) {
+    request.post(authOptions, function(error, response, body) {
       if (!error && response.statusCode === 200) {
         var access_token = body.access_token,
           refresh_token = body.refresh_token;
@@ -101,27 +111,28 @@ app.get("/callback", function (req, res) {
         var options = {
           url: "https://api.spotify.com/v1/me",
           headers: { Authorization: "Bearer " + access_token },
-          json: true,
+          json: true
         };
 
         // use the access token to access the Spotify Web API
-        request.get(options, function (error, response, body) {
+        request.get(options, function(error, response, body) {
           console.log(body);
         });
-
+        console.log(access_token);
         // we can also pass the token to the browser to make requests from there
+        //res.redirect('http://localhost:3000/#' +
         res.redirect(
-          "https://flexify-spotify.herokuapp.com/#" +
+          "/#" +
             querystring.stringify({
               access_token: access_token,
-              refresh_token: refresh_token,
+              refresh_token: refresh_token
             })
         );
       } else {
         res.redirect(
           "/#" +
             querystring.stringify({
-              error: "invalid_token",
+              error: "invalid_token"
             })
         );
       }
@@ -129,7 +140,7 @@ app.get("/callback", function (req, res) {
   }
 });
 
-app.get("/refresh_token", function (req, res) {
+app.get("/refresh_token", function(req, res) {
   // requesting access token from refresh token
   var refresh_token = req.query.refresh_token;
   var authOptions = {
@@ -137,23 +148,28 @@ app.get("/refresh_token", function (req, res) {
     headers: {
       Authorization:
         "Basic " +
-        new Buffer(client_id + ":" + client_secret).toString("base64"),
+        new Buffer(client_id + ":" + client_secret).toString("base64")
     },
     form: {
       grant_type: "refresh_token",
-      refresh_token: refresh_token,
+      refresh_token: refresh_token
     },
-    json: true,
+    json: true
   };
 
-  request.post(authOptions, function (error, response, body) {
+  request.post(authOptions, function(error, response, body) {
     if (!error && response.statusCode === 200) {
       var access_token = body.access_token;
       res.send({
-        access_token: access_token,
+        access_token: access_token
       });
     }
   });
 });
 
-app.listen(8888);
+app.set("port", process.env.PORT || 8888);
+
+// Start node server
+app.listen(app.get("port"), function() {
+  console.log("Node server is running on port " + app.get("port"));
+});
