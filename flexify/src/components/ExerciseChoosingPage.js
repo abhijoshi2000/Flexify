@@ -5,7 +5,6 @@ import Weightlifting from "../components/Weightlifting";
 import Cardio from "../components/Cardio";
 import HIIT from "../components/HIIT";
 import Dance from "../components/Dance";
-import PlaylistSelector from "../components/PlaylistSelector";
 
 class ExerciseChoosingPage extends Component {
   constructor(props) {
@@ -31,7 +30,7 @@ class ExerciseChoosingPage extends Component {
           low: 130,
           high: 150,
         },
-        ExerciseChosen: "WeightLifting",
+        ExerciseChosen: "Weightlifting",
       },
       () => {
         this.props.data(this.state.BPMCount, this.state.ExerciseChosen);
