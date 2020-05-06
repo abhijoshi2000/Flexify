@@ -19,7 +19,7 @@ class LoginPage extends Component {
           <img className="down-arrow" src={downArrow}></img>
         </div>
         <div className="login-page-images">
-          <a href="http://flexify-spotify.herokuapp.com/login">
+          <a href="http://localhost:8888/login">
             <img className="flexify-logo" src={flexify}></img>
           </a>
         </div>
